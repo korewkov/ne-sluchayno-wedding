@@ -1,0 +1,7 @@
+node_modules/
+.local/
+dist/
+*.tsbuildinfo
+**/config.json
+**/config.php
+**/sessions/
