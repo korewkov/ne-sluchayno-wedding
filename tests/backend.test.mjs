@@ -11,3 +11,16 @@ test('CSRF, body limits and distributed login limiter',async()=>{const s=setup()
 test('no +1 permission and foreign guest IDs',async()=>{const s=setup();await s.call('session','POST',{password:'secret'});const a=(await s.call('admin','POST',{...invitation,allowPlusOne:false})).data;const b=(await s.call('admin','POST',invitation)).data;const guests=(await s.call('invitation','GET',undefined,a.token)).data.guests.map(fill);const foreign=(await s.call('invitation','GET',undefined,b.token)).data.guests[0];assert.equal((await s.call('rsvp','POST',{guests:[...guests,fill(foreign)]},a.token)).status,403);assert.equal((await s.call('rsvp','POST',{guests:[...guests,{...fill(foreign),id:'new-companion',companion:true}]},a.token)).status,403);});
 test('concurrent RSVP keeps a single companion and sessions expire',async()=>{const s=setup();await s.call('session','POST',{password:'secret'});const {token}=(await s.call('admin','POST',invitation)).data;const guests=(await s.call('invitation','GET',undefined,token)).data.guests.map(fill);const companion={id:'new-companion',name:'Спутник',kind:'adult',companion:true,attendance:'yes',drinks:[],food:'',comment:''};const responses=await Promise.all([s.call('rsvp','POST',{guests:[...guests,companion]},token),s.call('rsvp','POST',{guests:[...guests,companion]},token)]);assert.ok(responses.every(r=>r.status===200));const result=(await s.call('invitation','GET',undefined,token)).data;assert.equal(result.guests.filter(g=>g.companion).length,1);for(let n=0;n<44;n++)s.advance();assert.equal((await s.call('session')).data.authenticated,false);assert.equal((await s.call('admin')).status,403);});
 test('storage faults produce generic failure without sensitive details',async()=>{const handler=createHandler({store:{async getWithMetadata(){throw Error('private token');}},env:{WEDDING_SESSION_SECRET:'test-only-secret-000000000000000000000',WEDDING_ADMIN_PASSWORD_HASH:passwordHash('secret')},logger:{error(){}}});const response=await handler(new Request(origin+'/api/invitation',{headers:{authorization:'Bearer '+'a'.repeat(64)}}));assert.equal(response.status,503);assert.doesNotMatch(await response.text(),/private token/);});
+
+
+// Use the real SDK to guard its conditional-write failure behaviour.
+test('Blobs conditional writes do not report HTTP errors as successful saves',async()=>{
+ process.env.NODE_ENV='test';
+ const {getStore}=await import('@netlify/blobs');
+ const {storageFetch}=await import('../netlify/functions/lib/storage-fetch.mjs');
+ const make=status=>getStore({name:'wedding-sdk-test',edgeURL:'https://blobs.example',uncachedEdgeURL:'https://blobs.example',siteID:'test-site',token:'test-only-token',consistency:'strong',fetch:storageFetch(async()=>new Response(null,{status,headers:{etag:'test-etag'}}))});
+ for(const status of [401,403,500,503])await assert.rejects(make(status).setJSON('key',{value:1},{onlyIfNew:true}),/Storage request failed/);
+ assert.equal((await make(412).setJSON('key',{}, {onlyIfNew:true})).modified,false);
+ assert.equal((await make(200).setJSON('key',{}, {onlyIfNew:true})).modified,true);
+ assert.equal(await make(404).getWithMetadata('missing',{type:'json'}),null);
+});
