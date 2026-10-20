@@ -1,0 +1,11 @@
+import {randomBytes, scryptSync} from 'node:crypto';
+import {mkdirSync,writeFileSync,existsSync} from 'node:fs';
+const directory=new URL('../.local/',import.meta.url);
+const access=new URL('netlify-admin.txt',directory),environment=new URL('netlify.env',directory);
+if(existsSync(access)||existsSync(environment))throw new Error('Секреты уже созданы. Существующие файлы не заменены.');
+const password=randomBytes(24).toString('base64url'),salt=randomBytes(16).toString('hex');
+const hash=`scrypt$${salt}$${scryptSync(password,salt,32).toString('hex')}`;
+mkdirSync(directory,{recursive:true,mode:0o700});
+writeFileSync(access,`Пароль кабинета /admin:\n${password}\n\nХраните этот файл только у себя. Не загружайте в GitHub и не отправляйте гостям.\n`,{mode:0o600,flag:'wx'});
+writeFileSync(environment,`WEDDING_ADMIN_PASSWORD_HASH=${hash}\nWEDDING_SESSION_SECRET=${randomBytes(32).toString('hex')}\n`,{mode:0o600,flag:'wx'});
+console.log('Созданы .local/netlify.env для Netlify и .local/netlify-admin.txt для владельца. Значения скрыты.');

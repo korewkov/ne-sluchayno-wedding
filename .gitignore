@@ -5,3 +5,8 @@ dist/
 **/config.json
 **/config.php
 **/sessions/
+
+.netlify/
+.env
+.env.*
+!.env.example
