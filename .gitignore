@@ -10,3 +10,5 @@ dist/
 .env
 .env.*
 !.env.example
+
+netlify/functions/lib/deployment.mjs

@@ -6,7 +6,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "vite build --config vite.standalone.ts",
+    "build": "node scripts/deploy-context.mjs && vite build --config vite.standalone.ts",
     "dev": "vite --config vite.standalone.ts",
     "check": "tsc --noEmit",
     "test": "node --test tests/backend.test.mjs"
