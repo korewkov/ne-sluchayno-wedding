@@ -34,6 +34,6 @@ export const quiz = [
 export const drinks = ['Игристое','Белое вино','Красное вино','Крепкие напитки','Безалкогольные'];
 export type Guest = {id:string;name:string;kind:'adult'|'child';companion:boolean;attendance:'yes'|'no'|'maybe'|'';drinks:string[];food:string;comment:string};
 export type Invitation = {id:string;greeting:string;label:string;allowPlusOne:boolean;guests:Guest[]};
-export type Settings = {gatheringTime:string;celebration:string;celebrationAddress:string;extraInfo:string};
-export const defaultSettings: Settings = {gatheringTime:wedding.gatheringTime,celebration:wedding.celebration,celebrationAddress:'',extraInfo:''};
+export type Settings = {gatheringTime:string;celebration:string;celebrationAddress:string;extraInfo:string;photoDescriptions:string[]};
+export const defaultSettings: Settings = {gatheringTime:wedding.gatheringTime,celebration:wedding.celebration,celebrationAddress:'',extraInfo:'',photoDescriptions:photos.map(photo=>photo.description)};
 

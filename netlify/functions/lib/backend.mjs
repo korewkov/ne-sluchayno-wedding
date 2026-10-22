@@ -2,7 +2,7 @@ import { randomBytes, createHash, createHmac, scryptSync, timingSafeEqual } from
 const hash = value => createHash('sha256').update(value).digest('hex');
 const id = () => randomBytes(16).toString('hex');
 const token = () => randomBytes(32).toString('hex');
-const defaults = { gatheringTime:'16:00', celebration:'Место празднования уточняется', celebrationAddress:'', extraInfo:'' };
+const defaults = { gatheringTime:'16:00', celebration:'Место празднования уточняется', celebrationAddress:'', extraInfo:'', photoDescriptions:[] };
 class ApiError extends Error { constructor(status,message){super(message);this.status=status;} }
 const fail=(status,message)=>{throw new ApiError(status,message);};
 const field=(value,max,required=false)=>{if(typeof value!=='string'||[...value.trim()].length>max||(required&&!value.trim()))fail(400,'Проверьте заполненные поля.');return value.trim();};
@@ -35,7 +35,7 @@ export function createHandler({store,env=process.env,now=()=>Date.now(),logger=c
   }
   if(path==='/api/settings'){
    if(method==='GET'){if(!await authenticated())await invitation();return respond((await read('settings/wedding'))?.data||defaults);}
-   await admin();const data=await body();if(method!=='POST')fail(405,'Метод не поддерживается.');const s={gatheringTime:field(data.gatheringTime,5,true),celebration:field(data.celebration,200,true),celebrationAddress:field(data.celebrationAddress,300),extraInfo:field(data.extraInfo,1000)};if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(s.gatheringTime))fail(400,'Проверьте время.');await store.setJSON('settings/wedding',s);return respond({ok:true});
+   await admin();const data=await body();if(method!=='POST')fail(405,'Метод не поддерживается.');if(!Array.isArray(data.photoDescriptions)||data.photoDescriptions.length!==13||data.photoDescriptions.some(value=>typeof value!=='string'||[...value.trim()].length>2000))fail(400,'Проверьте описания фотографий.');const s={gatheringTime:field(data.gatheringTime,5,true),celebration:field(data.celebration,200,true),celebrationAddress:field(data.celebrationAddress,300),extraInfo:field(data.extraInfo,1000),photoDescriptions:data.photoDescriptions.map(value=>value.trim())};if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(s.gatheringTime))fail(400,'Проверьте время.');await store.setJSON('settings/wedding',s);return respond({ok:true});
   }
   if(path==='/api/invitation'){if(method!=='GET')fail(405,'Метод не поддерживается.');return respond(cleanInvitation(await invitation()));}
   if(path==='/api/wishes'){if(method!=='POST')fail(405,'Метод не поддерживается.');const i=await invitation(),data=await body();const wish={id:idem?hash(i.id+idem):id(),invitation_id:i.id,name:field(data.name,100,true),message:field(data.message,2000,true),created_at:new Date(now()).toISOString()};if(idem&&(await read(`wish/${i.id}/${wish.id}`)))return respond({ok:true});await rate(`wish:${i.id}`,3);await store.setJSON(`wish/${i.id}/${wish.id}`,wish,{onlyIfNew:true});return respond({ok:true});}

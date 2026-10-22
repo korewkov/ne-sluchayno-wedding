@@ -47,3 +47,9 @@ html[data-reduced="true"] .photo-story-cue>i{animation:none}
 .wishes-section .wishes-form h3{font-size:clamp(36px,3.8vw,58px);margin:0 0 28px}
 .wishes-section .wishes-form .small-note{opacity:.8}
 @media(max-width:700px){.wishes-section{padding-top:58px;padding-bottom:72px}.wishes-layout{display:block}.wishes-intro{padding-top:0}.wishes-intro h2{font-size:16vw;margin:18px 0 22px}.wishes-intro>p{font-size:13px;max-width:280px;margin-bottom:38px}.wishes-section .wishes-form{padding-top:28px}.wishes-section .wishes-form h3{font-size:38px}}
+
+.admin-photo-descriptions{border:0;border-top:1px solid var(--line);padding:28px 0 0;margin:35px 0 25px}
+.admin-photo-descriptions legend{font-size:22px;letter-spacing:-.035em;margin-bottom:10px}
+.admin-photo-descriptions label{margin:22px 0!important}
+.admin-photo-descriptions label span{display:block;font-size:11px;margin-bottom:6px}
+.admin-photo-descriptions textarea{min-height:72px}

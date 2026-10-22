@@ -1,7 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {photos} from '../lib/content';
 
-export default function Gallery({reduced,onOpen}:{reduced:boolean;onOpen:(index:number,event:React.MouseEvent<HTMLButtonElement>)=>void}){
+export default function Gallery({reduced,onOpen,captions}:{reduced:boolean;onOpen:(index:number,event:React.MouseEvent<HTMLButtonElement>)=>void;captions?:string[]}){
  const section=useRef<HTMLElement>(null),rail=useRef<HTMLDivElement>(null);
  const drag=useRef<{x:number;y:number;scroll:number}|null>(null),suppressClick=useRef(false);
  const [index,setIndex]=useState(0),[progress,setProgress]=useState(0),[cat,setCat]=useState(false);
