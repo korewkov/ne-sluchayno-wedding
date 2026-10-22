@@ -36,3 +36,14 @@
 @media(max-height:550px){.archive.gallery-sticky{padding-top:10px;padding-bottom:6px}.gallery-sticky .archive-heading h2{font-size:32px}.gallery-sticky .archive-heading p{display:none}.gallery-sticky .archive-heading{padding-bottom:0}.gallery-sticky .archive-photo img{height:45svh;min-height:100px}.gallery-sticky .archive-foot{min-height:30px;margin-top:0}.gallery-sticky .cat-trigger{min-height:30px}.gallery-sticky .archive-photo>.photo-caption{margin-top:4px}}
 @media(prefers-reduced-motion:reduce){.photo-story-cue>i{animation:none}}
 html[data-reduced="true"] .photo-story-cue>i{animation:none}
+
+/* Wishes are a separate, quiet focus block so they stand apart from RSVP details. */
+.wishes-section{background:var(--ice);border-top:1px solid var(--blue);border-bottom:1px solid var(--blue);padding-top:90px;padding-bottom:110px}
+.wishes-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9vw;align-items:start}
+.wishes-intro{padding-top:24px}
+.wishes-intro h2{font-size:clamp(64px,7.7vw,120px);margin:22px 0 30px}
+.wishes-intro>p{max-width:300px;font-size:14px;line-height:1.8}
+.wishes-section .wishes-form{width:100%;margin:0;padding:34px 0 0;border-top:1px solid var(--wine)}
+.wishes-section .wishes-form h3{font-size:clamp(36px,3.8vw,58px);margin:0 0 28px}
+.wishes-section .wishes-form .small-note{opacity:.8}
+@media(max-width:700px){.wishes-section{padding-top:58px;padding-bottom:72px}.wishes-layout{display:block}.wishes-intro{padding-top:0}.wishes-intro h2{font-size:16vw;margin:18px 0 22px}.wishes-intro>p{font-size:13px;max-width:280px;margin-bottom:38px}.wishes-section .wishes-form{padding-top:28px}.wishes-section .wishes-form h3{font-size:38px}}
