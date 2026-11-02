@@ -75,4 +75,5 @@ html[data-reduced="true"] .photo-story-cue>i{animation:none}
 .admin-photo-descriptions label span{display:block;font-size:11px;margin-bottom:6px}
 .admin-photo-descriptions textarea{min-height:72px}
 
-.personal-greeting,.admin-note{overflow-wrap:anywhere;word-break:break-word}.personal-greeting{max-width:60ch}.admin-form textarea{resize:vertical;min-height:150px}
+.personal-greeting,.admin-note{overflow-wrap:anywhere;word-break:break-word}.personal-greeting{max-width:60ch}.personal-greeting p{margin:0 0 1.1em}.personal-greeting p:last-child{margin-bottom:0}.invitation-cta{display:inline-flex;margin-top:18px}.admin-form textarea{resize:vertical;min-height:150px}
+@media(max-width:700px){.personal-greeting{font-size:clamp(24px,6.8vw,31px);line-height:1.45}.personal-greeting p{margin-bottom:1em}.invitation-cta{margin-top:14px}}
