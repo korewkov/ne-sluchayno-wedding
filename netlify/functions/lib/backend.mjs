@@ -2,7 +2,7 @@ import { randomBytes, createHash, createHmac, scryptSync, timingSafeEqual } from
 const hash = value => createHash('sha256').update(value).digest('hex');
 const id = () => randomBytes(16).toString('hex');
 const token = () => randomBytes(32).toString('hex');
-const defaults = { gatheringTime:'16:00', celebration:'Место празднования уточняется', celebrationAddress:'', extraInfo:'', photoDescriptions:[] };
+const defaults = { gatheringTime:'16:00', celebration:'Ресторан «Зодиак»', celebrationAddress:'ул. Циолковского, 21', extraInfo:'', photoDescriptions:[] };
 class ApiError extends Error { constructor(status,message){super(message);this.status=status;} }
 const fail=(status,message)=>{throw new ApiError(status,message);};
 const field=(value,max,required=false)=>{if(typeof value!=='string'||[...value.trim()].length>max||(required&&!value.trim()))fail(400,'Проверьте заполненные поля.');return value.trim();};

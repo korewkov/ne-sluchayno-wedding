@@ -10,6 +10,27 @@
 @media(max-width:1000px) and (min-width:701px){.hero .hero-first{font-size:29vw}.hero .hero-last{font-size:23vw}.hero .hero-photo{left:38%;width:41%}}
 @media(max-width:700px){.hero{padding:95px 22px 94px;min-height:720px}.hero-artwork{margin:0 -22px}.hero .hero-first{top:12%;font-size:40vw}.hero .hero-last{bottom:12%;font-size:25.2vw}.hero .hero-photo{top:15%;height:78%;left:35%;width:56%}.hero .hero-bottom{padding-top:25px;gap:15px}.hero-summary{max-width:calc(100% - 60px)}.hero-summary>p{font-size:20px;margin-bottom:10px}}
 
+.fate-threads{position:absolute;z-index:0;inset:0 0 auto;top:90vh;width:100%;height:calc(100% - 90vh);pointer-events:none;overflow:visible;opacity:.52}
+.fate-threads .thread{fill:none;stroke-width:.28;vector-effect:non-scaling-stroke;stroke-dasharray:1 1;stroke-dashoffset:1;animation:thread-draw 2.4s cubic-bezier(.2,.7,.2,1) forwards}
+.fate-threads .thread-ice{stroke:#9fc9dd}.fate-threads .thread-cherry{stroke:#76112e;animation-delay:.35s}.fate-threads .thread-knot{stroke:#76112e;stroke-width:.42;opacity:.8;stroke-dasharray:1 1;animation-delay:1.2s}
+@keyframes thread-draw{to{stroke-dashoffset:0}}
+@media(max-width:700px){.fate-threads{top:78vh;height:calc(100% - 78vh);opacity:.42}.fate-threads .thread{stroke-width:.22}.fate-threads .thread-knot{stroke-width:.34}}
+@media(prefers-reduced-motion:reduce){.fate-threads .thread{animation:none;stroke-dashoffset:0}}
+html[data-reduced="true"] .fate-threads .thread{animation:none;stroke-dashoffset:0}
+
+@media(max-width:700px){
+  .story-mobile article{position:relative;isolation:isolate;padding:42px 0 48px}
+  .story-mobile article:nth-child(2){padding-top:62px}.story-mobile article:nth-child(3){padding-top:54px}
+  .story-mobile article figure{width:88%;margin:22px 0 24px 12%;overflow:hidden;clip-path:inset(0 0 0 0 round 2px)}
+  .story-mobile article:nth-child(2) figure{width:78%;margin-left:0;transform:translateX(4px)}
+  .story-mobile article:nth-child(3) figure{width:92%;margin-left:8%;transform:translateX(-5px)}
+  .story-mobile article figure img{display:block;transform:scale(1.02);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .story-mobile article.in-view figure img{transform:scale(1)}.story-mobile article p{max-width:31ch}
+  html,body{overflow-x:clip}.site-header{padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
+  .experience-controls{padding-bottom:max(8px,env(safe-area-inset-bottom))}.section-pad{padding-left:max(22px,env(safe-area-inset-left));padding-right:max(22px,env(safe-area-inset-right))}
+  .text-link,.quiz-next,.final-link{min-height:44px}
+}
+
 /* A full vertical scroll journey carries the gallery in either direction. */
 .archive-scroll{position:relative;height:calc(100svh + var(--gallery-travel,0px));overflow:visible;overflow-anchor:none}
 .archive.gallery-sticky{position:sticky;top:0;height:100svh;padding:28px 5.5vw 18px;display:flex;flex-direction:column;overflow:hidden;background:var(--milk)}

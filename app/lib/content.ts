@@ -3,7 +3,7 @@ export const wedding = {
   dateLabel: '05.12.2026', registrationTime: '13:00', city: 'Новокузнецк',
   registry: 'Орган ЗАГС № 1 города Новокузнецка и Новокузнецкого района Кузбасса',
   address: 'проспект Николая Ермакова, 1, корпус 2',
-  gatheringTime: '16:00', celebration: 'Место празднования уточняется',
+  gatheringTime: '16:00', celebration: 'Ресторан «Зодиак»', celebrationAddress: 'ул. Циолковского, 21',
   music: '/media/PHARAOH_-_NLO_79161764.mp3',
 };
 export const photos = [
@@ -35,5 +35,5 @@ export const drinks = ['Игристое','Белое вино','Красное 
 export type Guest = {id:string;name:string;kind:'adult'|'child';companion:boolean;attendance:'yes'|'no'|'maybe'|'';drinks:string[];food:string;comment:string};
 export type Invitation = {id:string;greeting:string;label:string;allowPlusOne:boolean;guests:Guest[]};
 export type Settings = {gatheringTime:string;celebration:string;celebrationAddress:string;extraInfo:string;photoDescriptions:string[]};
-export const defaultSettings: Settings = {gatheringTime:wedding.gatheringTime,celebration:wedding.celebration,celebrationAddress:'',extraInfo:'',photoDescriptions:photos.map(photo=>photo.description)};
+export const defaultSettings: Settings = {gatheringTime:wedding.gatheringTime,celebration:wedding.celebration,celebrationAddress:wedding.celebrationAddress,extraInfo:'',photoDescriptions:photos.map(photo=>photo.description)};
 
