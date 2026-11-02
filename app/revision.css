@@ -74,3 +74,5 @@ html[data-reduced="true"] .photo-story-cue>i{animation:none}
 .admin-photo-descriptions label{margin:22px 0!important}
 .admin-photo-descriptions label span{display:block;font-size:11px;margin-bottom:6px}
 .admin-photo-descriptions textarea{min-height:72px}
+
+.personal-greeting,.admin-note{overflow-wrap:anywhere;word-break:break-word}.personal-greeting{max-width:60ch}.admin-form textarea{resize:vertical;min-height:150px}

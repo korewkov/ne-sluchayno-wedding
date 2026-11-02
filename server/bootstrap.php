@@ -28,6 +28,7 @@ function request_body(): array {
  if(!is_array($value))fail(400,'Некорректный запрос.');return $value;
 }
 function field(mixed $value,int $max,bool $required=false): string {if(!is_string($value)||strlen($value)>$max*4||preg_match('//u',$value)!==1)fail(400,'Проверьте заполненные поля.');$value=trim($value);$length=function_exists('mb_strlen')?mb_strlen($value,'UTF-8'):strlen($value);if($length>$max||($required&&$value===''))fail(400,'Проверьте заполненные поля.');return $value;}
+function unlimitedText(mixed $value,bool $required=false): string {if(!is_string($value)||preg_match('//u',$value)!==1)fail(400,'Проверьте заполненные поля.');$value=trim($value);if($required&&$value==='')fail(400,'Проверьте заполненные поля.');return $value;}
 function id(): string {return bin2hex(random_bytes(16));}
 function transaction(callable $action): mixed {$db=database();$db->beginTransaction();try{$value=$action();$db->commit();return $value;}catch(Throwable $e){if($db->inTransaction())$db->rollBack();throw $e;}}
 function rate(string $key,int $max=12,int $seconds=60): void {
