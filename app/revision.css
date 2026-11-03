@@ -80,3 +80,15 @@ html[data-reduced="true"] .photo-story-cue>i{animation:none}
 .gallery-sticky .archive-photo{background:transparent;border:0;padding:0;overflow:visible;transform:rotate(var(--polaroid-tilt,0deg));transition:transform .45s cubic-bezier(.2,.7,.2,1),filter .45s;filter:drop-shadow(0 14px 18px rgba(57,11,32,.12))}.gallery-sticky .archive-photo:nth-child(3n+1){--polaroid-tilt:-1.2deg}.gallery-sticky .archive-photo:nth-child(3n+2){--polaroid-tilt:.8deg}.gallery-sticky .archive-photo:nth-child(3n){--polaroid-tilt:-.5deg}.gallery-sticky .archive-photo:hover,.gallery-sticky .archive-photo:focus-visible{transform:translateY(-8px) rotate(0deg);filter:drop-shadow(0 20px 24px rgba(57,11,32,.2))}.polaroid-frame{display:block;background:#fffdf9;padding:12px 12px 20px}.polaroid-frame img{display:block!important;width:100%!important;height:clamp(160px,43svh,500px)!important;aspect-ratio:auto!important;object-fit:cover}.polaroid-label{display:block;padding:12px 4px 0;color:var(--wine);font:italic 500 clamp(20px,2.1vw,30px)/1.05 var(--serif);text-align:left;letter-spacing:-.03em}.gallery-sticky .photo-meta{display:none}
 @media(max-width:700px){.gallery-sticky .archive-photo{flex-basis:76vw}.polaroid-frame{padding:9px 9px 16px}.polaroid-frame img{height:clamp(150px,45svh,460px)!important}.polaroid-label{font-size:21px;padding-top:10px}.gallery-sticky .archive-photo:hover,.gallery-sticky .archive-photo:focus-visible{transform:translateY(-5px) rotate(0deg)}}
 @media(max-width:700px){.personal-greeting{font-size:clamp(24px,6.8vw,31px);line-height:1.45}.personal-greeting p{margin-bottom:1em}.invitation-cta{margin-top:14px}}
+
+/* Polaroid wall direction */
+.gallery-sticky .photo-rail{gap:clamp(20px,2.4vw,42px);align-items:center;padding-top:22px;padding-bottom:22px}
+.gallery-sticky .archive-photo{flex-basis:clamp(260px,25vw,390px)}
+.polaroid-frame{padding:clamp(10px,1vw,16px) clamp(10px,1vw,16px) clamp(16px,1.5vw,24px);background:#fffefa;box-shadow:0 12px 28px rgba(57,11,32,.12)}
+.polaroid-frame img{height:clamp(250px,35svh,430px)!important;aspect-ratio:1/1!important;object-fit:cover}
+.polaroid-label{font-size:clamp(18px,1.65vw,27px);padding:14px 3px 0;min-height:42px}
+.gallery-sticky .archive-photo:nth-child(4n+1){--polaroid-tilt:-2.2deg}
+.gallery-sticky .archive-photo:nth-child(4n+2){--polaroid-tilt:1.4deg}
+.gallery-sticky .archive-photo:nth-child(4n+3){--polaroid-tilt:-.8deg}
+.gallery-sticky .archive-photo:nth-child(4n){--polaroid-tilt:2deg}
+@media(max-width:700px){.gallery-sticky .photo-rail{gap:18px;padding-top:12px;padding-bottom:12px}.gallery-sticky .archive-photo{flex-basis:78vw}.polaroid-frame{padding:9px 9px 17px}.polaroid-frame img{height:clamp(210px,42svh,390px)!important;aspect-ratio:1/1!important}.polaroid-label{font-size:20px;padding-top:11px}}
